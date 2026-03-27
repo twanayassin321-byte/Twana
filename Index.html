@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>🎬 سینەمای پێشەوا قازی محمد | ڤێرژنی پڕۆفیشناڵ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700;800&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* بەکارهێنانی فۆنتی Vazirmatn و Noto Sans بۆ باشترین کوالێتی کوردی */
+      font-family: 'Vazirmatn', 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+      background: url('https://i.ibb.co/0ym8PgzQ/78536ff0f8111a296f97fcfd3b179884.jpg') center/cover fixed no-repeat;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* تەوەرەی شووشەیی سەرەکی */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      z-index: -1;
+    }
+
+    /* پارتیکڵەکان */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .particle {
+      position: absolute;
+      background: rgba(248, 214, 78, 0.5);
+      border-radius: 50%;
+      filter: blur(3px);
+      animation: floatParticle 14s infinite linear;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.6; }
+      85% { opacity: 0.6; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* هێدەر - وێنەکە بە شووشەیی */
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 1100;
+      margin: 16px 24px 0;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(12, 12, 20, 0.65);
+      backdrop-filter: blur(20px);
+      border-radius: 60px;
+      border: 1px solid rgba(248, 214, 78, 0.5);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    /* وێنەکە بە شووشەیی */
+    .header-logo {
+      height: 52px;
+      width: auto;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(4px);
+      padding: 4px 8px;
+      border: 1px solid rgba(248, 214, 78, 0.3);
+      transition: 0.2s;
+    }
+    .site-badge {
+      font-weight: 900;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, #f8d64e, #ffaa33);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .user-area {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+    }
+    .icon-btn {
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px;
+      border-radius: 50%;
+      transition: 0.2s;
+      color: #f8d64e;
+    }
+    .avatar {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(145deg, #f8d64e, #e6b422);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .user-dropdown, .notify-dropdown {
+      position: absolute;
+      top: 55px;
+      left: 0;
+      background: rgba(15, 15, 25, 0.98);
+      backdrop-filter: blur(24px);
+      border-radius: 24px;
+      padding: 16px;
+      min-width: 230px;
+      border: 1px solid #f8d64e;
+      z-index: 1200;
+      display: none;
+    }
+    .notify-dropdown {
+      right: 0;
+      left: auto;
+      min-width: 280px;
+    }
+    .user-dropdown.show, .notify-dropdown.show { display: block; }
+
+    /* مینوی سەرەوە */
+    .main-menu {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 24px 12px;
+      flex-wrap: wrap;
+    }
+    .menu-item {
+      background: rgba(30, 30, 45, 0.65);
+      backdrop-filter: blur(12px);
+      border: none;
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #eee;
+      cursor: pointer;
+      transition: 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+    .menu-item.active, .menu-item:hover {
+      background: #f8d64e;
+      color: #000;
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(248, 214, 78, 0.4);
+    }
+
+    /* گەڕان */
+    .search-wrap {
+      margin: 12px 24px;
+    }
+    .search-box {
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 80px;
+      background: rgba(25, 25, 40, 0.7);
+      border: 1px solid rgba(248, 214, 78, 0.4);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      backdrop-filter: blur(8px);
+      font-family: inherit;
+    }
+    .search-box:focus {
+      border-color: #f8d64e;
+      background: rgba(35, 35, 55, 0.9);
+    }
+
+    /* فلتەر چپس */
+    .filter-chips {
+      display: flex;
+      gap: 12px;
+      padding: 0 24px 12px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      background: rgba(40, 40, 55, 0.7);
+      padding: 6px 22px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+    .chip.active, .chip:hover {
+      background: #f8d64e;
+      color: #000;
+    }
+
+    /* گرید */
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 28px;
+      padding: 20px 28px 40px;
+    }
+    .movie-card {
+      background: rgba(18, 18, 28, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(248, 214, 78, 0.3);
+      cursor: pointer;
+      position: relative;
+    }
+    .movie-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      border-color: #f8d64e;
+      box-shadow: 0 25px 35px -12px black;
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+    }
+    .card-info {
+      padding: 12px;
+      text-align: center;
+      font-weight: 700;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      font-size: 0.9rem;
+    }
+    .fav-overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 1.2rem;
+    }
+    .fav-overlay.active {
+      color: #ff4d4d;
+      text-shadow: 0 0 6px red;
+    }
+
+    /* مۆدالی وردەکاری */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(24px);
+      z-index: 2000;
+      display: none;
+      overflow-y: auto;
+      padding: 30px;
+    }
+    .modal-card {
+      max-width: 1100px;
+      margin: 20px auto;
+      background: rgba(12, 12, 22, 0.92);
+      backdrop-filter: blur(24px);
+      border-radius: 48px;
+      padding: 28px;
+      border: 1px solid #f8d64e;
+      animation: fadeUp 0.3s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .close-modal {
+      background: #f8d64e;
+      border: none;
+      padding: 8px 28px;
+      border-radius: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-family: inherit;
+    }
+    .servers-group {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+    .server-btn {
+      background: #2a2a3a;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      border: none;
+      color: white;
+      font-family: inherit;
+    }
+    .server-btn:hover {
+      background: #f8d64e;
+      color: black;
+    }
+    iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 32px;
+      border: 2px solid #f8d64e;
+      margin-top: 16px;
+    }
+    .parts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .part-card {
+      background: rgba(30, 30, 45, 0.7);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: 0.2s;
+    }
+    .part-card img {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+    }
+    .part-name {
+      padding: 10px 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .rating-stars i {
+      font-size: 1.6rem;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+    .comment-item {
+      background: rgba(30, 30, 45, 0.7);
+      padding: 12px;
+      border-radius: 20px;
+      margin-top: 8px;
+    }
+
+    /* پانێڵی بەڕێوەبەر */
+    .admin-panel {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      max-width: 480px;
+      background: rgba(8, 8, 16, 0.98);
+      backdrop-filter: blur(30px);
+      border-radius: 36px;
+      padding: 24px;
+      z-index: 1500;
+      border: 1px solid #f8d64e;
+      display: none;
+    }
+    input, textarea, select {
+      background: rgba(35, 35, 50, 0.9);
+      border: 1px solid #555;
+      border-radius: 20px;
+      padding: 12px;
+      color: white;
+      width: 100%;
+      margin-bottom: 14px;
+      font-family: inherit;
+    }
+
+    /* مۆدالی ئەکاونت */
+    .auth-modal {
+      max-width: 420px;
+      margin: 10vh auto;
+    }
+    .auth-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #f8d64e;
+    }
+    .auth-tab {
+      background: none;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: inherit;
+    }
+    .auth-tab.active {
+      color: #f8d64e;
+      border-bottom: 2px solid #f8d64e;
+    }
+    .auth-form button {
+      background: #f8d64e;
+      color: black;
+      border: none;
+      padding: 12px;
+      border-radius: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    @media (max-width: 640px) {
+      .movies-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+      .topbar { margin: 10px; padding: 6px 16px; }
+      .site-badge { font-size: 1rem; }
+      .header-logo { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+<div class="particles" id="particles"></div>
+
+<header class="topbar">
+  <div class="logo-area">
+    <img class="header-logo" src="https://i.ibb.co/gbw9xwhW/19fe86fb85bfb1b15a386d7adab77856.jpg" alt="سینەمای پێشەوا قازی محمد">
+    <div class="site-badge">✨ سینەمای پێشەوا قازی محمد</div>
+  </div>
+  <div class="user-area">
+    <i class="fa-regular fa-bell icon-btn" id="bellIcon"></i>
+    <div class="avatar" id="avatarBtn"><i class="fa-regular fa-user"></i></div>
+    <i class="fa-solid fa-plus-circle icon-btn" id="adminToggle"></i>
+    <div id="userDropdown" class="user-dropdown">
+      <p><i class="fa-regular fa-user"></i> <span id="dropdownUsername">بینەر</span></p>
+      <p><i class="fa-regular fa-envelope"></i> <span id="dropdownEmail">user@cinema.com</span></p>
+      <hr>
+      <p><i class="fa-regular fa-heart"></i> دڵخوازەکان: <span id="favCount">0</span></p>
+      <p><i class="fa-regular fa-clock"></i> دواتر بینین: <span id="wlCount">0</span></p>
+      <p><i class="fa-regular fa-eye"></i> مێژووی بینین: <span id="historyCount">0</span></p>
+      <hr>
+      <p style="cursor:pointer;" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> دەرچوون</p>
+    </div>
+    <div id="notifyDropdown" class="notify-dropdown">
+      <p><i class="fa-regular fa-bell"></i> ئاگانامەکان</p>
+      <hr>
+      <div id="notifyContent">هیچ ئاگانامەیەک نییە</div>
+    </div>
+  </div>
+</header>
+
+<div class="main-menu">
+  <button class="menu-item active" data-menu="all"><i class="fa-solid fa-house"></i> پێشەکی</button>
+  <button class="menu-item" data-menu="movie"><i class="fa-solid fa-film"></i> فیلمەکان</button>
+  <button class="menu-item" data-menu="series"><i class="fa-solid fa-tv"></i> زنجیرەکان</button>
+  <button class="menu-item" id="favMenuBtn"><i class="fa-regular fa-heart"></i> دڵخوازەکان</button>
+  <button class="menu-item" id="watchlistMenuBtn"><i class="fa-regular fa-clock"></i> دواتر بینین</button>
+  <button class="menu-item" id="historyMenuBtn"><i class="fa-regular fa-eye"></i> مێژووی بینین</button>
+</div>
+
+<div class="search-wrap">
+  <input type="text" id="searchInput" class="search-box" placeholder="🔍 گەڕان بە ناوی فیلم، زنجیرە، ئەکتەر...">
+</div>
+
+<div class="filter-chips">
+  <span class="chip active" data-type="all">هەموو</span>
+  <span class="chip" data-type="movie">فیلم</span>
+  <span class="chip" data-type="series">زنجیرە</span>
+</div>
+
+<div id="moviesGrid" class="movies-grid"></div>
+
+<div id="adminPanel" class="admin-panel">
+  <div style="display:flex; justify-content:space-between;">
+    <h3><i class="fa-solid fa-crown"></i> زیادکردنی ناوەڕۆک</h3>
+    <button onclick="closeAdmin()" style="background:none; border:none; color:#f8d64e; font-size:24px;">✖</button>
+  </div>
+  <select id="adminType">
+    <option value="movie">فیلم (کۆمەڵە بەش)</option>
+    <option value="series">زنجیرە</option>
+  </select>
+  <input type="text" id="adminTitle" placeholder="ناونان *">
+  <input type="text" id="adminImage" placeholder="لینکی پۆستەر *">
+  <input type="text" id="adminDesc" placeholder="باسکردن (کورتە)">
+  <div id="dynamicAdminFields"></div>
+  <button id="saveAdminBtn" style="background:#f8d64e; color:#000; border-radius:40px; padding:12px; width:100%;">➕ زیادکردن</button>
+</div>
+
+<div id="detailModal" class="modal">
+  <div class="modal-card">
+    <button class="close-modal" onclick="closeModal()"><i class="fa-solid fa-arrow-right"></i> گەڕانەوە</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div id="authModal" class="modal" style="display:none;">
+  <div class="modal-card auth-modal">
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">چوونەژوورەوە</button>
+      <button class="auth-tab" data-tab="register">تۆمارکردن</button>
+    </div>
+    <div id="loginForm" class="auth-form">
+      <input type="text" id="loginUsername" placeholder="ناوی بەکارهێنەر">
+      <input type="password" id="loginPassword" placeholder="وشەی نهێنی">
+      <div class="error-msg" id="loginError" style="color:#ff6b6b;"></div>
+      <button id="doLogin">چوونەژوورەوە</button>
+    </div>
+    <div id="registerForm" class="auth-form" style="display:none;">
+      <input type="text" id="regUsername" placeholder="ناوی بەکارهێنەر">
+      <input type="email" id="regEmail" placeholder="ئیمەیڵ">
+      <input type="password" id="regPassword" placeholder="وشەی نهێنی">
+      <div class="error-msg" id="regError" style="color:#ff6b6b;"></div>
+      <button id="doRegister">تۆمارکردن</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===================== داتای سەرەتایی =====================
+  let globalContent = [
+    {
+      title: "Mission: Impossible Collection",
+      type: "movie",
+      img: "https://image.tmdb.org/t/p/w500/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg",
+      desc: "کۆمەڵە فیلمی ئیکشن و هەستبزوێنی ئیتان هانت. زنجیرەیەکی پڕ لە سەرکێشی و فێڵبازی کە بە یەکێک لە باشترین زنجیرە فیلمەکانی مێژووی سینەما دادەنرێت.",
+      parts: [
+        { name: "Mission: Impossible (1996)", img: "https://image.tmdb.org/t/p/w500/hfnrual76gPeNFduhD4xzHWpfTw.jpg", link: "https://vidsrc.cc/v2/embed/movie/954", desc: "یەکەم بەش، ئیتان هانت دەبێتە ئەندامی تیمی نھێنی IMF و تووشی خیانەت دەبێت.", server2: "https://vidsrc.me/embed/movie/954" },
+        { name: "M:I 2 (2000)", img: "https://image.tmdb.org/t/p/w500/l5uxY5m5OInWpcExIpKG6AR3rgL.jpg", link: "https://vidsrc.cc/v2/embed/movie/955", desc: "ئیتان هانت دەبێت ڤایرۆسێکی کوشندە بدۆزێتەوە و ڕێگری لە بڵاوبوونەوەی بکات." },
+        { name: "M:I 3 (2006)", img: "https://image.tmdb.org/t/p/w500/vKGYCpmQyV9uHybWDzXuII8Los5.jpg", link: "https://vidsrc.cc/v2/embed/movie/956", desc: "ئیتان لەگەڵ بازرگانێکی چەکدا ڕووبەڕوو دەبێتەوە کە ھەڕەشەی ژیانی خۆشەویستەکەی دەکات." },
+        { name: "Ghost Protocol (2011)", img: "https://image.tmdb.org/t/p/w500/eRZTGx7GsiKqPch96k27LK005ZL.jpg", link: "https://vidsrc.cc/v2/embed/movie/56292", desc: "پاش تەقینەوەی کرملین، تیمی IMF تاوانبار دەکرێن و دەبێت پلانیەک بۆ پاککردنەوەی ناویان جێبەجێ بکەن." },
+        { name: "Rogue Nation (2015)", img: "https://image.tmdb.org/t/p/w500/7WqvX9Z4S7mD1RzF5qY0pV6qHjK.jpg", link: "https://vidsrc.cc/v2/embed/movie/187385", desc: "ئیتان دەبێت لەگەڵ ڕێکخراوێکی نھێنی بە ناوی 'سندوقە ڕەشەکە' ململانێ بکات." },
+        { name: "Fallout (2018)", img: "https://image.tmdb.org/t/p/w500/AkJpS1YvDUU9p9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/353081", desc: "ئیتان و تیمەکەی دەبێت ڕێگری لە کارەساتێکی جیھانی بکەن کە لەلایەن ڕێکخراوێکی تیرۆریستییەوە پلانی بۆ دانراوە." },
+        { name: "Dead Reckoning (2023)", img: "https://image.tmdb.org/t/p/w500/NNxYp9s9s9s9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/575264", desc: "بەشی یەکەم لە کۆتایی زنجیرەکە، ئیتان دەبێت بەرگری لە چەکێکی مەترسیدار بکات." }
+      ]
+    },
+    {
+      title: "Fast & Furious Collection",
+      type: "movie",
+      img: "https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
+      desc: "خێراترین و هەرەسەرنجڕاکێشترین زنجیرەی پێشبڕکێ و تاوانکاری خێزانی. پڕ لە دیمەنە ئەدرەنالینزێن و ئۆتۆمبێلە خێراکان.",
+      parts: [
+        { name: "The Fast and the Furious (2001)", img: "https://image.tmdb.org/t/p/w500/gqY0ITBgT7A82poL9jv851qdnIb.jpg", link: "https://vidsrc.cc/v2/embed/movie/97", desc: "پۆلیسی نھێنی دۆمینیک تۆرێتۆ دەناسێت و لە نێوان یاسا و خێزاندا دەمێنێتەوە." },
+        { name: "2 Fast 2 Furious (2003)", img: "https://image.tmdb.org/t/p/w500/6nDZExrDKIXvSAghsFKVFRVJuSf.jpg", link: "https://vidsrc.cc/v2/embed/movie/584", desc: "برایەن ئۆکانر لەگەڵ هاوڕێ کۆنەکەی دەبێت بازرگانێکی چەک ڕووخێنن." },
+        { name: "Tokyo Drift (2006)", img: "https://image.tmdb.org/t/p/w500/46xqGOwHbh2TH2avWSw3SMXph4E.jpg", link: "https://vidsrc.cc/v2/embed/movie/9615", desc: "لە تۆکیۆ، پێشبڕکێی درێفت یارییەکی نوێی ژیان و مردنە." },
+        { name: "Fast & Furious (2009)", img: "https://image.tmdb.org/t/p/w500/lUtVoRukW7WNtUySwd8hWlByBds.jpg", link: "https://vidsrc.cc/v2/embed/movie/13804", desc: "دۆم و برایەن دووبارە یەک دەگرنەوە بۆ ڕووخاندنی بازرگانێکی هێڕۆین." },
+        { name: "Fast Five (2011)", img: "https://image.tmdb.org/t/p/w500/y93mC77Xpsm07Lp795fK8zMv7aD.jpg", link: "https://vidsrc.cc/v2/embed/movie/38757", desc: "تیمەکە پلانێک بۆ دزینی ١٠٠ ملیۆن دۆلار لە بازرگانێکی تاوانکار دادەنێن." },
+        { name: "Fast & Furious 6 (2013)", img: "https://image.tmdb.org/t/p/w500/n3196UUE9FZ3S0YpCf9pv9S0vMc.jpg", link: "https://vidsrc.cc/v2/embed/movie/82992", desc: "تیمەکە لەگەڵ هۆبسدا دەبێت ڕێگری لە تیمی تانکێکی سەربازی بکەن." },
+        { name: "Furious 7 (2015)", img: "https://image.tmdb.org/t/p/w500/k9Sj8id899u6vL6K9pI68S3o9uW.jpg", link: "https://vidsrc.cc/v2/embed/movie/168259", desc: "تۆڵەسەندنەوە لە کوژراوی تیمەکە، شەڕێکی گەورە لە ئاسمان و زەویدا." },
+        { name: "The Fate of the Furious (2017)", img: "https://image.tmdb.org/t/p/w500/7is7mS6S4S0s9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/337339", desc: "دۆم بەھۆی ژنێکی نھێنییەوە خیانەت دەکات و تیمەکە دەبێت ڕێگری لە کارەساتێکی جیھانی بکەن." },
+        { name: "F9 (2021)", img: "https://image.tmdb.org/t/p/w500/bI7shS4S0s9s9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/385128", desc: "دۆم براکەی نەناسراو دەردەکەوێت و مێژووی خێزانەکە دەردەکەوێت." },
+        { name: "Fast X (2023)", img: "https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg", link: "https://vidsrc.cc/v2/embed/movie/385687", desc: "دوژمنێکی کۆن دەگەڕێتەوە بۆ تۆڵەسەندنەوە، تیمەکە لە مەترسیدا." }
+      ]
+    },
+    {
+      title: "Breaking Bad",
+      type: "series",
+      img: "https://image.tmdb.org/t/p/w500/ggm8bbst9pP9u1x99v6gP0Xo6Wd.jpg",
+      desc: "مامۆستای کیمیا واڵتەر وایت بۆ پاراستنی خێزانەکەی دەکەوێتە بازرگانی ماددە هۆشبەرەکان. یەکێک لە باشترین زنجیرە مێژووییەکانی مێژوو.",
+      tmdbId: "1396",
+      seasonsData: [{ season: 1, episodes: 7 }, { season: 2, episodes: 13 }, { season: 3, episodes: 13 }, { season: 4, episodes: 13 }, { season: 5, episodes: 16 }]
+    },
+    {
+      title: "Vikings",
+      type: "series",
+      img: "https://image.tmdb.org/t/p/w500/bQLH879T9HsSStIAlEkp987mYgn.jpg",
+      desc: "چیرۆکی ڕاگنار لۆدبرۆک و گەشتی وایکینگەکان بۆ دۆزینەوەی خاک و شکۆ. ئەفسانەیی و پڕ لە شەڕ و سەرکێشی.",
+      tmdbId: "44217",
+      seasonsData: [{ season: 1, episodes: 9 }, { season: 2, episodes: 10 }, { season: 3, episodes: 10 }, { season: 4, episodes: 20 }, { season: 5, episodes: 20 }, { season: 6, episodes: 20 }]
+    }
+  ];
+
+  let users = {};
+  let currentUser = null;
+  let contentViews = {};
+  let notifications = [];
+
+  function saveData() {
+    localStorage.setItem("cine_users_final", JSON.stringify(users));
+    localStorage.setItem("cine_content_final", JSON.stringify(globalContent));
+    localStorage.setItem("cine_views_final", JSON.stringify(contentViews));
+    localStorage.setItem("cine_notif_final", JSON.stringify(notifications));
+  }
+  function loadData() {
+    try {
+      let su = localStorage.getItem("cine_users_final");
+      if(su) users = JSON.parse(su);
+      let sc = localStorage.getItem("cine_content_final");
+      if(sc) globalContent = JSON.parse(sc);
+      let sv = localStorage.getItem("cine_views_final");
+      if(sv) contentViews = JSON.parse(sv);
+      let sn = localStorage.getItem("cine_notif_final");
+      if(sn) notifications = JSON.parse(sn);
+    } catch(e) { console.warn(e); }
+    if(!users["admin"]) users["admin"] = { password: "admin123", email: "admin@cinema.com", favorites: [], watchlist: [], history: [], ratings: {}, comments: {} };
+    saveData();
+  }
+
+  function addNotification(msg) {
+    notifications.unshift({ text: msg, date: new Date().toISOString() });
+    if(notifications.length > 20) notifications.pop();
+    saveData();
+    updateNotifyUI();
+  }
+
+  function updateNotifyUI() {
+    let cont = document.getElementById("notifyContent");
+    if(notifications.length === 0) cont.innerHTML = "هیچ ئاگانامەیەک نییە";
+    else {
+      cont.innerHTML = notifications.slice(0,5).map(n => `<div style="margin-bottom:8px;">🔔 ${n.text}<br><small>${new Date(n.date).toLocaleString()}</small></div>`).join('');
+    }
+  }
+
+  function setCurrentUser(username) {
+    currentUser = username;
+    localStorage.setItem("cine_currentUser_final", username);
+    updateUserUI();
+    renderGrid();
+  }
+  function logout() {
+    currentUser = null;
+    localStorage.removeItem("cine_currentUser_final");
+    updateUserUI();
+    renderGrid();
+  }
+  function updateUserUI() {
+    if(currentUser && users[currentUser]) {
+      let u = users[currentUser];
+      document.getElementById("dropdownUsername").innerText = currentUser;
+      document.getElementById("dropdownEmail").innerText = u.email || "user@cinema.com";
+      document.getElementById("favCount").innerText = u.favorites.length;
+      document.getElementById("wlCount").innerText = u.watchlist.length;
+      document.getElementById("historyCount").innerText = u.history.length;
+    } else {
+      document.getElementById("dropdownUsername").innerText = "ناچووە ژوورەوە";
+      document.getElementById("dropdownEmail").innerText = "تکایە بچۆ ژوورەوە";
+      document.getElementById("favCount").innerText = "0";
+      document.getElementById("wlCount").innerText = "0";
+      document.getElementById("historyCount").innerText = "0";
+    }
+  }
+
+  function getAvgRating(title) {
+    let total = 0, count = 0;
+    for(let u in users) {
+      let r = users[u].ratings[title];
+      if(r) { total += r; count++; }
+    }
+    return count === 0 ? 0 : total / count;
+  }
+  function getUserRating(title) {
+    return currentUser ? (users[currentUser]?.ratings[title] || 0) : 0;
+  }
+  function setUserRating(title, stars) {
+    if(!currentUser) { addNotification("تکایە بچۆ ژوورەوە بۆ هەڵسەنگاندن"); return false; }
+    users[currentUser].ratings[title] = stars;
+    saveData();
+    addNotification(`تۆ ${stars} ئەستێرەت بە "${title}" دا`);
+    return true;
+  }
+  function getComments(title) {
+    let all = [];
+    for(let u in users) {
+      let cs = users[u].comments[title];
+      if(cs) cs.forEach(c => all.push({ user: u, text: c.text, date: c.date }));
+    }
+    all.sort((a,b)=>new Date(b.date)-new Date(a.date));
+    return all;
+  }
+  function addComment(title, text) {
+    if(!currentUser) { addNotification("تکایە بچۆ ژوورەوە بۆ کۆمێنت"); return false; }
+    if(!users[currentUser].comments[title]) users[currentUser].comments[title] = [];
+    users[currentUser].comments[title].push({ text, date: new Date().toISOString() });
+    saveData();
+    addNotification(`کۆمێنتێکی نوێ لە "${title}"`);
+    return true;
+  }
+  function toggleFav(title) {
+    if(!currentUser) { addNotification("تکایە بچۆ ژوورەوە"); return false; }
+    let idx = users[currentUser].favorites.indexOf(title);
+    if(idx === -1) { users[currentUser].favorites.push(title); addNotification(`${title} زیاد کرا بۆ دڵخوازەکان`); }
+    else { users[currentUser].favorites.splice(idx,1); addNotification(`${title} لە دڵخوازەکان لابرا`); }
+    saveData(); updateUserUI(); renderGrid(); return true;
+  }
+  function toggleWatchlist(title) {
+    if(!currentUser) { addNotification("تکایە بچۆ ژوورەوە"); return false; }
+    let idx = users[currentUser].watchlist.indexOf(title);
+    if(idx === -1) { users[currentUser].watchlist.push(title); addNotification(`${title} زیاد کرا بۆ دواتر بینین`); }
+    else { users[currentUser].watchlist.splice(idx,1); addNotification(`${title} لە دواتر بینین لابرا`); }
+    saveData(); updateUserUI(); renderGrid(); return true;
+  }
+  function addToHistory(title, partName) {
+    if(!currentUser) return;
+    users[currentUser].history.unshift({ title, part: partName, date: new Date().toISOString() });
+    if(users[currentUser].history.length > 50) users[currentUser].history.pop();
+    contentViews[title] = (contentViews[title] || 0) + 1;
+    saveData(); updateUserUI();
+  }
+
+  let currentFilter = "all", onlyFav = false, onlyWatch = false, onlyHistory = false;
+  function renderGrid() {
+    let term = document.getElementById("searchInput").value.toLowerCase();
+    let filtered = globalContent.filter(i => i.title.toLowerCase().includes(term));
+    if(currentFilter !== "all") filtered = filtered.filter(i => i.type === currentFilter);
+    if(onlyFav && currentUser) filtered = filtered.filter(i => users[currentUser].favorites.includes(i.title));
+    if(onlyWatch && currentUser) filtered = filtered.filter(i => users[currentUser].watchlist.includes(i.title));
+    if(onlyHistory && currentUser) {
+      let historyTitles = new Set(users[currentUser].history.map(h => h.title));
+      filtered = filtered.filter(i => historyTitles.has(i.title));
+    }
+    let grid = document.getElementById("moviesGrid");
+    if(!filtered.length) { grid.innerHTML = `<div style="text-align:center;padding:60px;">😢 هیچ ناوەڕۆکێک نەدۆزرایەوە</div>`; return; }
+    grid.innerHTML = filtered.map(item => {
+      let isFav = currentUser && users[currentUser].favorites.includes(item.title);
+      return `<div class="movie-card" onclick="openDetail('${escapeHtml(item.title)}')">
+        <div class="fav-overlay ${isFav ? 'active' : ''}" onclick="event.stopPropagation(); toggleFav('${escapeHtml(item.title)}')">
+          <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
+        </div>
+        <img class="card-img" src="${item.img}" onerror="this.src='https://placehold.co/300x450?text=No+Poster'">
+        <div class="card-info">${item.title}<span style="display:block; font-size:11px;">👁️ ${contentViews[item.title] || 0}</span></div>
+      </div>`;
+    }).join('');
+  }
+
+  function openDetail(title) {
+    let item = globalContent.find(i => i.title === title);
+    if(!item) return;
+    document.getElementById("modalContent").innerHTML = buildDetailHTML(item);
+    document.getElementById("detailModal").style.display = "block";
+  }
+  function buildDetailHTML(item) {
+    let avg = getAvgRating(item.title);
+    let userRating = getUserRating(item.title);
+    let html = `<div style="display:flex; justify-content:space-between; flex-wrap:wrap; align-items:center;">
+      <h2 style="border-right:4px solid #f8d64e; padding-right:16px;">${item.title}</h2>
+      <button class="server-btn" onclick="toggleWatchlist('${escapeHtml(item.title)}')"><i class="fa-regular fa-clock"></i> ${currentUser && users[currentUser]?.watchlist.includes(item.title) ? 'لابردن لە دواتر' : 'زیادکردن بۆ دواتر'}</button>
+    </div>`;
+    html += `<div style="margin:16px 0; background:rgba(0,0,0,0.45); padding:16px; border-radius:24px;"><i class="fa-solid fa-align-left"></i> ${escapeHtml(item.desc || 'باسکردن نییە')}</div>`;
+    html += `<div><i class="fa-regular fa-eye"></i> بینین: ${contentViews[item.title] || 0}</div>`;
+    html += `<div class="rating-stars" style="margin:16px 0;">`;
+    for(let i=1;i<=5;i++) {
+      let starClass = (userRating >= i) ? "fa-solid fa-star" : (avg >= i-0.5 ? "fa-solid fa-star-half-alt" : "fa-regular fa-star");
+      html += `<i class="${starClass}" style="color:#ffc107; cursor:pointer;" onclick="rateItem('${escapeHtml(item.title)}', ${i})"></i>`;
+    }
+    html += `<span style="margin-right:8px;"> (${avg.toFixed(1)} / 5)</span></div>`;
+
+    if(item.type === 'movie') {
+      html += `<div class="parts-grid">`;
+      item.parts.forEach((part, idx) => {
+        let servers = `<div class="servers-group"><button class="server-btn" onclick="playMovie('${part.link}', '${escapeHtml(item.title)}', '${escapeHtml(part.name)}')">🎬 سێرڤەر 1</button>`;
+        if(part.server2) servers += `<button class="server-btn" onclick="playMovie('${part.server2}', '${escapeHtml(item.title)}', '${escapeHtml(part.name)}')">⚡ سێرڤەر 2</button>`;
+        servers += `</div>`;
+        html += `<div class="part-card">
+          <img src="${part.img}" onerror="this.src='https://placehold.co/200x300?text=No+Poster'">
+          <div class="part-name"><strong>${part.name}</strong></div>
+          ${part.desc ? `<div style="font-size:0.7rem; padding:0 8px 8px; text-align:center;">${escapeHtml(part.desc)}</div>` : ''}
+          ${servers}
+        </div>`;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div id="seriesPanel"><h4>📺 وەرزەکان:</h4><div id="seasonsList"></div><div id="episodesList" style="margin-top:16px;"></div></div>`;
+      html += `<script>
+        setTimeout(() => {
+          let seasons = ${JSON.stringify(item.seasonsData)};
+          let tmdb = "${item.tmdbId}";
+          let title = "${escapeHtml(item.title)}";
+          let container = document.getElementById('seasonsList');
+          if(container) {
+            container.innerHTML = seasons.map(s => '<button class="server-btn" data-season="'+s.season+'" onclick="loadEpisodesSeries('+s.season+', \\''+tmdb+'\\', \\''+title+'\\')">وەرزی '+s.season+'</button>').join('');
+          }
+        }, 100);
+      <\/script>`;
+    }
+
+    let commentList = getComments(item.title);
+    html += `<div style="margin-top:32px;"><h4><i class="fa-regular fa-comment"></i> کۆمێنتەکان (${commentList.length})</h4>`;
+    commentList.forEach(c => {
+      html += `<div class="comment-item"><strong>${escapeHtml(c.user)}</strong> <span style="font-size:0.7rem;">${new Date(c.date).toLocaleString()}</span><br>${escapeHtml(c.text)}</div>`;
+    });
+    html += `<textarea id="newComment" rows="2" style="width:100%; background:#1e1e2e; border-radius:24px; padding:12px; margin-top:12px;" placeholder="ڕای خۆت بنووسە..."></textarea>
+    <button class="server-btn" style="margin-top:8px;" onclick="addComment('${escapeHtml(item.title)}')">ناردن</button></div>`;
+    return html;
+  }
+
+  window.playMovie = (link, title, part) => { addToHistory(title, part); document.getElementById("modalContent").innerHTML = `<button class="close-modal" onclick="openDetail('${escapeHtml(title)}')" style="background:#333;">← گەڕانەوە</button><iframe src="${link}" frameborder="0" allowfullscreen></iframe>`; };
+  window.loadEpisodesSeries = (season, tmdbId, title) => {
+    let item = globalContent.find(i => i.tmdbId === tmdbId);
+    if(!item) return;
+    let seasonObj = item.seasonsData.find(s => s.season === season);
+    let epCount = seasonObj ? seasonObj.episodes : 10;
+    let epHtml = `<div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px;">`;
+    for(let i=1;i<=epCount;i++) epHtml += `<button class="server-btn" onclick="playSeries('${tmdbId}', ${season}, ${i}, '${escapeHtml(title)}', 'وەرزی ${season} ئەڵقەی ${i}')">ئەڵقەی ${i}</button>`;
+    epHtml += `</div>`;
+    document.getElementById("episodesList").innerHTML = epHtml;
+  };
+  window.playSeries = (tmdbId, season, ep, title, part) => {
+    addToHistory(title, part);
+    let link = `https://vidsrc.cc/v2/embed/tv/${tmdbId}/${season}/${ep}`;
+    document.getElementById("modalContent").innerHTML = `<button class="close-modal" onclick="openDetail('${escapeHtml(title)}')" style="background:#333;">← گەڕانەوە</button><iframe src="${link}" frameborder="0" allowfullscreen></iframe>`;
+  };
+  window.rateItem = (title, stars) => { if(setUserRating(title, stars)) openDetail(title); };
+  window.addComment = (title) => {
+    let txt = document.getElementById("newComment").value.trim();
+    if(txt && addComment(title, txt)) openDetail(title);
+  };
+  window.toggleFav = toggleFav;
+  window.toggleWatchlist = toggleWatchlist;
+
+  function closeAdmin() { document.getElementById("adminPanel").style.display = "none"; }
+  function updateAdminFields() {
+    let type = document.getElementById("adminType").value;
+    let container = document.getElementById("dynamicAdminFields");
+    if(type === "movie") container.innerHTML = `<textarea id="partsJson" rows="6" placeholder='[{"name":"ناوی بەش","img":"پۆستەر","link":"https://vidsrc.cc/v2/embed/movie/ID","desc":"باسکردنی بەش"}]'></textarea>`;
+    else container.innerHTML = `<textarea id="seasonsJson" rows="3" placeholder='[{"season":1,"episodes":10}]'></textarea><input id="tmdbId" placeholder="TMDB ID *">`;
+  }
+  window.addCustomContent = () => {
+    let title = document.getElementById("adminTitle").value.trim();
+    let img = document.getElementById("adminImage").value.trim();
+    let desc = document.getElementById("adminDesc").value.trim();
+    let type = document.getElementById("adminType").value;
+    if(!title || !img) { alert("ناونان و پۆستەر پێویستە"); return; }
+    if(type === "movie") {
+      let parts; try { parts = JSON.parse(document.getElementById("partsJson").value); } catch(e) { alert("JSON هەڵەیە"); return; }
+      if(!parts.length) return;
+      globalContent.push({ title, type: "movie", img, desc: desc || "باسکردن نییە", parts });
+      addNotification(`فیلمی نوێ "${title}" زیاد کرا`);
+    } else {
+      let seasonsData; try { seasonsData = JSON.parse(document.getElementById("seasonsJson").value); } catch(e) { alert("JSON وەرزەکان هەڵەیە"); return; }
+      let tmdbId = document.getElementById("tmdbId").value.trim();
+      if(!tmdbId) return;
+      globalContent.push({ title, type: "series", img, desc: desc || "باسکردن نییە", tmdbId, seasonsData });
+      addNotification(`زنجیرەی نوێ "${title}" زیاد کرا`);
+    }
+    saveData(); closeAdmin(); renderGrid(); alert(`✅ "${title}" زیاد کرا!`);
+  };
+
+  function showAuthModal() { document.getElementById("authModal").style.display = "block"; }
+  function register() {
+    let u = document.getElementById("regUsername").value.trim();
+    let e = document.getElementById("regEmail").value.trim();
+    let p = document.getElementById("regPassword").value;
+    if(!u || !e || !p) { document.getElementById("regError").innerText = "پڕکردنەوەی هەموو خانەکان پێویستە"; return; }
+    if(users[u]) { document.getElementById("regError").innerText = "ناو هەیە"; return; }
+    users[u] = { password: p, email: e, favorites: [], watchlist: [], history: [], ratings: {}, comments: {} };
+    saveData(); setCurrentUser(u); document.getElementById("authModal").style.display = "none";
+    addNotification(`بەخێربێیت ${u}!`);
+  }
+  function login() {
+    let u = document.getElementById("loginUsername").value.trim();
+    let p = document.getElementById("loginPassword").value;
+    if(!users[u] || users[u].password !== p) { document.getElementById("loginError").innerText = "هەڵەیە"; return; }
+    setCurrentUser(u); document.getElementById("authModal").style.display = "none";
+    addNotification(`${u} چوویە ژوورەوە`);
+  }
+
+  document.getElementById("doLogin").onclick = login;
+  document.getElementById("doRegister").onclick = register;
+  document.querySelectorAll(".auth-tab").forEach(tab => tab.onclick = () => {
+    document.querySelectorAll(".auth-tab").forEach(t=>t.classList.remove("active"));
+    tab.classList.add("active");
+    let isLogin = tab.dataset.tab === "login";
+    document.getElementById("loginForm").style.display = isLogin ? "flex" : "none";
+    document.getElementById("registerForm").style.display = isLogin ? "none" : "flex";
+  });
+  document.getElementById("logoutBtn").onclick = () => logout();
+  document.getElementById("avatarBtn").onclick = (e) => {
+    if(!currentUser) showAuthModal();
+    else { document.getElementById("userDropdown").classList.toggle("show"); e.stopPropagation(); }
+  };
+  document.getElementById("bellIcon").onclick = (e) => {
+    document.getElementById("notifyDropdown").classList.toggle("show");
+    e.stopPropagation();
+  };
+  document.addEventListener("click", (e) => {
+    if(!document.getElementById("avatarBtn").contains(e.target) && !document.getElementById("userDropdown").contains(e.target))
+      document.getElementById("userDropdown").classList.remove("show");
+    if(!document.getElementById("bellIcon").contains(e.target) && !document.getElementById("notifyDropdown").contains(e.target))
+      document.getElementById("notifyDropdown").classList.remove("show");
+  });
+  document.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", function() {
+    currentFilter = this.dataset.type; onlyFav = false; onlyWatch = false; onlyHistory = false;
+    document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+    this.classList.add("active");
+    renderGrid(); updateMenuStyle();
+  }));
+  function updateMenuStyle() {
+    document.getElementById("favMenuBtn").style.background = onlyFav ? "#f8d64e" : "";
+    document.getElementById("watchlistMenuBtn").style.background = onlyWatch ? "#f8d64e" : "";
+    document.getElementById("historyMenuBtn").style.background = onlyHistory ? "#f8d64e" : "";
+  }
+  document.getElementById("favMenuBtn").onclick = () => { if(!currentUser) showAuthModal(); else { onlyFav = !onlyFav; onlyWatch = false; onlyHistory = false; if(onlyFav) { currentFilter = "all"; document.querySelectorAll(".chip")[0].classList.add("active"); document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active")); document.querySelectorAll(".chip")[0].classList.add("active"); } renderGrid(); updateMenuStyle(); } };
+  document.getElementById("watchlistMenuBtn").onclick = () => { if(!currentUser) showAuthModal(); else { onlyWatch = !onlyWatch; onlyFav = false; onlyHistory = false; if(onlyWatch) { currentFilter = "all"; document.querySelectorAll(".chip")[0].classList.add("active"); document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active")); document.querySelectorAll(".chip")[0].classList.add("active"); } renderGrid(); updateMenuStyle(); } };
+  document.getElementById("historyMenuBtn").onclick = () => { if(!currentUser) showAuthModal(); else { onlyHistory = !onlyHistory; onlyFav = false; onlyWatch = false; if(onlyHistory) { currentFilter = "all"; document.querySelectorAll(".chip")[0].classList.add("active"); document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active")); document.querySelectorAll(".chip")[0].classList.add("active"); } renderGrid(); updateMenuStyle(); } };
+  document.querySelectorAll(".menu-item[data-menu]").forEach(btn => btn.addEventListener("click", function() {
+    currentFilter = this.dataset.menu; onlyFav = false; onlyWatch = false; onlyHistory = false;
+    document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+    document.querySelectorAll(".chip")[0].classList.add("active");
+    renderGrid(); updateMenuStyle();
+  }));
+  document.getElementById("adminToggle").onclick = () => {
+    if(currentUser !== "admin") { alert("تەنها بەڕێوەبەر (admin/admin123)"); return; }
+    let p = document.getElementById("adminPanel");
+    p.style.display = p.style.display === "none" ? "block" : "none";
+    updateAdminFields();
+  };
+  document.getElementById("adminType").addEventListener("change", updateAdminFields);
+  document.getElementById("saveAdminBtn").onclick = addCustomContent;
+  document.getElementById("searchInput").addEventListener("input", () => renderGrid());
+  window.closeModal = () => document.getElementById("detailModal").style.display = "none";
+  window.escapeHtml = (s) => String(s).replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;});
+
+  function createParticles() {
+    let container = document.getElementById("particles");
+    for(let i=0;i<80;i++) {
+      let p = document.createElement("div");
+      p.classList.add("particle");
+      let s = Math.random()*8+2;
+      p.style.width = s+"px"; p.style.height = s+"px";
+      p.style.left = Math.random()*100+"%";
+      p.style.animationDuration = Math.random()*15+8+"s";
+      p.style.animationDelay = Math.random()*10+"s";
+      container.appendChild(p);
+    }
+  }
+  createParticles();
+
+  loadData();
+  let saved = localStorage.getItem("cine_currentUser_final");
+  if(saved && users[saved]) setCurrentUser(saved);
+  else currentUser = null;
+  updateUserUI();
+  renderGrid();
+  updateMenuStyle();
+  updateNotifyUI();
+</script>
+</body>
+</html>
