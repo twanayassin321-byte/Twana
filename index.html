@@ -6,8 +6,11 @@
   <title>🎬 سینەمای پێشەوا قازی محمد | ڤێرژنی پڕۆفیشناڵ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700;800&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
   <style>
     * {
       margin: 0;
@@ -16,14 +19,12 @@
     }
 
     body {
-      /* بەکارهێنانی فۆنتی Vazirmatn و Noto Sans بۆ باشترین کوالێتی کوردی */
-      font-family: 'Vazirmatn', 'Noto Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+      font-family: 'Cairo', 'Segoe UI', system-ui, sans-serif;
       background: url('https://i.ibb.co/0ym8PgzQ/78536ff0f8111a296f97fcfd3b179884.jpg') center/cover fixed no-repeat;
       color: #fff;
       overflow-x: hidden;
     }
 
-    /* تەوەرەی شووشەیی سەرەکی */
     body::before {
       content: '';
       position: fixed;
@@ -36,7 +37,6 @@
       z-index: -1;
     }
 
-    /* پارتیکڵەکان */
     .particles {
       position: fixed;
       top: 0;
@@ -60,7 +60,7 @@
       100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
     }
 
-    /* هێدەر - وێنەکە بە شووشەیی */
+    /* گۆڕانکاری لە Navbar بەپێی وێنە نوێیەکە */
     .topbar {
       position: sticky;
       top: 16px;
@@ -70,7 +70,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(12, 12, 20, 0.65);
+      /* لێرەدا وێنەکەت زیاد کراوە لەگەڵ چینێکی ڕەشی سووک بۆ خوێندنەوەی دەقەکان */
+      background: linear-gradient(rgba(12, 12, 20, 0.75), rgba(12, 12, 20, 0.75)), url('https://i.ibb.co/gbw9xwhW/19fe86fb85bfb1b15a386d7adab77856.jpg') center/cover no-repeat;
       backdrop-filter: blur(20px);
       border-radius: 60px;
       border: 1px solid rgba(248, 214, 78, 0.5);
@@ -81,25 +82,24 @@
       align-items: center;
       gap: 16px;
     }
-    /* وێنەکە بە شووشەیی */
     .header-logo {
       height: 52px;
       width: auto;
       border-radius: 20px;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(4px);
       padding: 4px 8px;
       border: 1px solid rgba(248, 214, 78, 0.3);
-      transition: 0.2s;
     }
     .site-badge {
-      font-weight: 900;
+      font-weight: 800;
       font-size: 1.3rem;
       background: linear-gradient(135deg, #f8d64e, #ffaa33);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       letter-spacing: -0.5px;
+      text-shadow: 0px 2px 4px rgba(0,0,0,0.8); /* بۆ ئەوەی لەسەر وێنەکە دیار بێت */
     }
     .user-area {
       display: flex;
@@ -110,7 +110,7 @@
     .icon-btn {
       font-size: 1.5rem;
       cursor: pointer;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
       padding: 8px;
       border-radius: 50%;
       transition: 0.2s;
@@ -148,7 +148,6 @@
     }
     .user-dropdown.show, .notify-dropdown.show { display: block; }
 
-    /* مینوی سەرەوە */
     .main-menu {
       display: flex;
       justify-content: center;
@@ -170,7 +169,6 @@
       align-items: center;
       gap: 8px;
       font-size: 0.95rem;
-      font-family: inherit;
     }
     .menu-item.active, .menu-item:hover {
       background: #f8d64e;
@@ -179,7 +177,6 @@
       box-shadow: 0 6px 20px rgba(248, 214, 78, 0.4);
     }
 
-    /* گەڕان */
     .search-wrap {
       margin: 12px 24px;
     }
@@ -200,7 +197,6 @@
       background: rgba(35, 35, 55, 0.9);
     }
 
-    /* فلتەر چپس */
     .filter-chips {
       display: flex;
       gap: 12px;
@@ -221,7 +217,6 @@
       color: #000;
     }
 
-    /* گرید */
     .movies-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -276,11 +271,10 @@
       text-shadow: 0 0 6px red;
     }
 
-    /* مۆدالی وردەکاری */
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.9);
       backdrop-filter: blur(24px);
       z-index: 2000;
       display: none;
@@ -309,7 +303,6 @@
       font-weight: bold;
       cursor: pointer;
       margin-bottom: 20px;
-      font-family: inherit;
     }
     .servers-group {
       display: flex;
@@ -326,19 +319,30 @@
       transition: 0.2s;
       border: none;
       color: white;
-      font-family: inherit;
     }
     .server-btn:hover {
       background: #f8d64e;
       color: black;
     }
-    iframe {
+    iframe, .plyr {
       width: 100%;
       aspect-ratio: 16/9;
       border-radius: 32px;
       border: 2px solid #f8d64e;
       margin-top: 16px;
+      overflow: hidden;
     }
+    
+    /* ستایلی ژێرنووسی کوردی */
+    ::cue {
+      background: rgba(0, 0, 0, 0.8);
+      color: #f8d64e;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px #000;
+    }
+
     .parts-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -374,7 +378,6 @@
       margin-top: 8px;
     }
 
-    /* پانێڵی بەڕێوەبەر */
     .admin-panel {
       position: fixed;
       bottom: 20px;
@@ -399,7 +402,6 @@
       font-family: inherit;
     }
 
-    /* مۆدالی ئەکاونت */
     .auth-modal {
       max-width: 420px;
       margin: 10vh auto;
@@ -418,7 +420,6 @@
       cursor: pointer;
       font-size: 1.1rem;
       font-weight: 600;
-      font-family: inherit;
     }
     .auth-tab.active {
       color: #f8d64e;
@@ -432,7 +433,6 @@
       border-radius: 40px;
       font-weight: bold;
       cursor: pointer;
-      font-family: inherit;
     }
 
     @media (max-width: 640px) {
@@ -454,7 +454,7 @@
   <div class="user-area">
     <i class="fa-regular fa-bell icon-btn" id="bellIcon"></i>
     <div class="avatar" id="avatarBtn"><i class="fa-regular fa-user"></i></div>
-    <i class="fa-solid fa-plus-circle icon-btn" id="adminToggle"></i>
+    <i class="fa-solid fa-plus-circle icon-btn" id="adminToggle" style="display: none;"></i>
     <div id="userDropdown" class="user-dropdown">
       <p><i class="fa-regular fa-user"></i> <span id="dropdownUsername">بینەر</span></p>
       <p><i class="fa-regular fa-envelope"></i> <span id="dropdownEmail">user@cinema.com</span></p>
@@ -539,8 +539,10 @@
   </div>
 </div>
 
+<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
 <script>
-  // ===================== داتای سەرەتایی =====================
+  // ===================== داتای سەرەتایی (گۆڕینی لینکەکان بۆ کارپێکراو) =====================
   let globalContent = [
     {
       title: "Mission: Impossible Collection",
@@ -548,13 +550,13 @@
       img: "https://image.tmdb.org/t/p/w500/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg",
       desc: "کۆمەڵە فیلمی ئیکشن و هەستبزوێنی ئیتان هانت. زنجیرەیەکی پڕ لە سەرکێشی و فێڵبازی کە بە یەکێک لە باشترین زنجیرە فیلمەکانی مێژووی سینەما دادەنرێت.",
       parts: [
-        { name: "Mission: Impossible (1996)", img: "https://image.tmdb.org/t/p/w500/hfnrual76gPeNFduhD4xzHWpfTw.jpg", link: "https://vidsrc.cc/v2/embed/movie/954", desc: "یەکەم بەش، ئیتان هانت دەبێتە ئەندامی تیمی نھێنی IMF و تووشی خیانەت دەبێت.", server2: "https://vidsrc.me/embed/movie/954" },
-        { name: "M:I 2 (2000)", img: "https://image.tmdb.org/t/p/w500/l5uxY5m5OInWpcExIpKG6AR3rgL.jpg", link: "https://vidsrc.cc/v2/embed/movie/955", desc: "ئیتان هانت دەبێت ڤایرۆسێکی کوشندە بدۆزێتەوە و ڕێگری لە بڵاوبوونەوەی بکات." },
-        { name: "M:I 3 (2006)", img: "https://image.tmdb.org/t/p/w500/vKGYCpmQyV9uHybWDzXuII8Los5.jpg", link: "https://vidsrc.cc/v2/embed/movie/956", desc: "ئیتان لەگەڵ بازرگانێکی چەکدا ڕووبەڕوو دەبێتەوە کە ھەڕەشەی ژیانی خۆشەویستەکەی دەکات." },
-        { name: "Ghost Protocol (2011)", img: "https://image.tmdb.org/t/p/w500/eRZTGx7GsiKqPch96k27LK005ZL.jpg", link: "https://vidsrc.cc/v2/embed/movie/56292", desc: "پاش تەقینەوەی کرملین، تیمی IMF تاوانبار دەکرێن و دەبێت پلانیەک بۆ پاککردنەوەی ناویان جێبەجێ بکەن." },
-        { name: "Rogue Nation (2015)", img: "https://image.tmdb.org/t/p/w500/7WqvX9Z4S7mD1RzF5qY0pV6qHjK.jpg", link: "https://vidsrc.cc/v2/embed/movie/187385", desc: "ئیتان دەبێت لەگەڵ ڕێکخراوێکی نھێنی بە ناوی 'سندوقە ڕەشەکە' ململانێ بکات." },
-        { name: "Fallout (2018)", img: "https://image.tmdb.org/t/p/w500/AkJpS1YvDUU9p9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/353081", desc: "ئیتان و تیمەکەی دەبێت ڕێگری لە کارەساتێکی جیھانی بکەن کە لەلایەن ڕێکخراوێکی تیرۆریستییەوە پلانی بۆ دانراوە." },
-        { name: "Dead Reckoning (2023)", img: "https://image.tmdb.org/t/p/w500/NNxYp9s9s9s9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/575264", desc: "بەشی یەکەم لە کۆتایی زنجیرەکە، ئیتان دەبێت بەرگری لە چەکێکی مەترسیدار بکات." }
+        { name: "Mission: Impossible (1996)", img: "https://image.tmdb.org/t/p/w500/hfnrual76gPeNFduhD4xzHWpfTw.jpg", link: "https://vidsrc.net/embed/movie/954", desc: "یەکەم بەش، ئیتان هانت دەبێتە ئەندامی تیمی نھێنی IMF." },
+        { name: "M:I 2 (2000)", img: "https://image.tmdb.org/t/p/w500/l5uxY5m5OInWpcExIpKG6AR3rgL.jpg", link: "https://vidsrc.net/embed/movie/955", desc: "ئیتان هانت دەبێت ڤایرۆسێکی کوشندە بدۆزێتەوە." },
+        { name: "M:I 3 (2006)", img: "https://image.tmdb.org/t/p/w500/vKGYCpmQyV9uHybWDzXuII8Los5.jpg", link: "https://vidsrc.net/embed/movie/956", desc: "ئیتان لەگەڵ بازرگانێکی چەکدا ڕووبەڕوو دەبێتەوە." },
+        { name: "Ghost Protocol (2011)", img: "https://image.tmdb.org/t/p/w500/eRZTGx7GsiKqPch96k27LK005ZL.jpg", link: "https://vidsrc.net/embed/movie/56292", desc: "پاش تەقینەوەی کرملین، تیمی IMF تاوانبار دەکرێن." },
+        { name: "Rogue Nation (2015)", img: "https://image.tmdb.org/t/p/w500/7WqvX9Z4S7mD1RzF5qY0pV6qHjK.jpg", link: "https://vidsrc.net/embed/movie/187385", desc: "ئیتان دەبێت لەگەڵ ڕێکخراوێکی نھێنی بە ناوی 'سندوقە ڕەشەکە' ململانێ بکات." },
+        { name: "Fallout (2018)", img: "https://image.tmdb.org/t/p/w500/AkJpS1YvDUU9p9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.net/embed/movie/353081", desc: "ئیتان و تیمەکەی دەبێت ڕێگری لە کارەساتێکی جیھانی بکەن." },
+        { name: "Dead Reckoning (2023)", img: "https://image.tmdb.org/t/p/w500/NNxYp9s9s9s9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.net/embed/movie/575264", desc: "بەشی یەکەم لە کۆتایی زنجیرەکە، بەرگری لە چەکێکی مەترسیدار." }
       ]
     },
     {
@@ -563,33 +565,14 @@
       img: "https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg",
       desc: "خێراترین و هەرەسەرنجڕاکێشترین زنجیرەی پێشبڕکێ و تاوانکاری خێزانی. پڕ لە دیمەنە ئەدرەنالینزێن و ئۆتۆمبێلە خێراکان.",
       parts: [
-        { name: "The Fast and the Furious (2001)", img: "https://image.tmdb.org/t/p/w500/gqY0ITBgT7A82poL9jv851qdnIb.jpg", link: "https://vidsrc.cc/v2/embed/movie/97", desc: "پۆلیسی نھێنی دۆمینیک تۆرێتۆ دەناسێت و لە نێوان یاسا و خێزاندا دەمێنێتەوە." },
-        { name: "2 Fast 2 Furious (2003)", img: "https://image.tmdb.org/t/p/w500/6nDZExrDKIXvSAghsFKVFRVJuSf.jpg", link: "https://vidsrc.cc/v2/embed/movie/584", desc: "برایەن ئۆکانر لەگەڵ هاوڕێ کۆنەکەی دەبێت بازرگانێکی چەک ڕووخێنن." },
-        { name: "Tokyo Drift (2006)", img: "https://image.tmdb.org/t/p/w500/46xqGOwHbh2TH2avWSw3SMXph4E.jpg", link: "https://vidsrc.cc/v2/embed/movie/9615", desc: "لە تۆکیۆ، پێشبڕکێی درێفت یارییەکی نوێی ژیان و مردنە." },
-        { name: "Fast & Furious (2009)", img: "https://image.tmdb.org/t/p/w500/lUtVoRukW7WNtUySwd8hWlByBds.jpg", link: "https://vidsrc.cc/v2/embed/movie/13804", desc: "دۆم و برایەن دووبارە یەک دەگرنەوە بۆ ڕووخاندنی بازرگانێکی هێڕۆین." },
-        { name: "Fast Five (2011)", img: "https://image.tmdb.org/t/p/w500/y93mC77Xpsm07Lp795fK8zMv7aD.jpg", link: "https://vidsrc.cc/v2/embed/movie/38757", desc: "تیمەکە پلانێک بۆ دزینی ١٠٠ ملیۆن دۆلار لە بازرگانێکی تاوانکار دادەنێن." },
-        { name: "Fast & Furious 6 (2013)", img: "https://image.tmdb.org/t/p/w500/n3196UUE9FZ3S0YpCf9pv9S0vMc.jpg", link: "https://vidsrc.cc/v2/embed/movie/82992", desc: "تیمەکە لەگەڵ هۆبسدا دەبێت ڕێگری لە تیمی تانکێکی سەربازی بکەن." },
-        { name: "Furious 7 (2015)", img: "https://image.tmdb.org/t/p/w500/k9Sj8id899u6vL6K9pI68S3o9uW.jpg", link: "https://vidsrc.cc/v2/embed/movie/168259", desc: "تۆڵەسەندنەوە لە کوژراوی تیمەکە، شەڕێکی گەورە لە ئاسمان و زەویدا." },
-        { name: "The Fate of the Furious (2017)", img: "https://image.tmdb.org/t/p/w500/7is7mS6S4S0s9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/337339", desc: "دۆم بەھۆی ژنێکی نھێنییەوە خیانەت دەکات و تیمەکە دەبێت ڕێگری لە کارەساتێکی جیھانی بکەن." },
-        { name: "F9 (2021)", img: "https://image.tmdb.org/t/p/w500/bI7shS4S0s9s9s9s9s9s9s9s9s.jpg", link: "https://vidsrc.cc/v2/embed/movie/385128", desc: "دۆم براکەی نەناسراو دەردەکەوێت و مێژووی خێزانەکە دەردەکەوێت." },
-        { name: "Fast X (2023)", img: "https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg", link: "https://vidsrc.cc/v2/embed/movie/385687", desc: "دوژمنێکی کۆن دەگەڕێتەوە بۆ تۆڵەسەندنەوە، تیمەکە لە مەترسیدا." }
+        { name: "The Fast and the Furious (2001)", img: "https://image.tmdb.org/t/p/w500/gqY0ITBgT7A82poL9jv851qdnIb.jpg", link: "https://vidsrc.net/embed/movie/97", desc: "پۆلیسی نھێنی دۆمینیک تۆرێتۆ دەناسێت و لە نێوان یاسا و خێزاندا دەمێنێتەوە." },
+        { name: "2 Fast 2 Furious (2003)", img: "https://image.tmdb.org/t/p/w500/6nDZExrDKIXvSAghsFKVFRVJuSf.jpg", link: "https://vidsrc.net/embed/movie/584", desc: "برایەن ئۆکانر لەگەڵ هاوڕێ کۆنەکەی دەبێت بازرگانێکی چەک ڕووخێنن." },
+        { name: "Tokyo Drift (2006)", img: "https://image.tmdb.org/t/p/w500/46xqGOwHbh2TH2avWSw3SMXph4E.jpg", link: "https://vidsrc.net/embed/movie/9615", desc: "لە تۆکیۆ، پێشبڕکێی درێفت یارییەکی نوێی ژیان و مردنە." },
+        { name: "Fast & Furious (2009)", img: "https://image.tmdb.org/t/p/w500/lUtVoRukW7WNtUySwd8hWlByBds.jpg", link: "https://vidsrc.net/embed/movie/13804", desc: "دۆم و برایەن دووبارە یەک دەگرنەوە بۆ ڕووخاندنی بازرگانێکی هێڕۆین." },
+        { name: "Fast Five (2011)", img: "https://image.tmdb.org/t/p/w500/y93mC77Xpsm07Lp795fK8zMv7aD.jpg", link: "https://vidsrc.net/embed/movie/38757", desc: "تیمەکە پلانێک بۆ دزینی ١٠٠ ملیۆن دۆلار دادەنێن." },
+        { name: "Fast & Furious 6 (2013)", img: "https://image.tmdb.org/t/p/w500/n3196UUE9FZ3S0YpCf9pv9S0vMc.jpg", link: "https://vidsrc.net/embed/movie/82992", desc: "تیمەکە لەگەڵ هۆبسدا دەبێت ڕێگری لە تیمی تانکێکی سەربازی بکەن." },
+        { name: "Furious 7 (2015)", img: "https://image.tmdb.org/t/p/w500/k9Sj8id899u6vL6K9pI68S3o9uW.jpg", link: "https://vidsrc.net/embed/movie/168259", desc: "تۆڵەسەندنەوە لە کوژراوی تیمەکە، شەڕێکی گەورە لە ئاسمان و زەویدا." }
       ]
-    },
-    {
-      title: "Breaking Bad",
-      type: "series",
-      img: "https://image.tmdb.org/t/p/w500/ggm8bbst9pP9u1x99v6gP0Xo6Wd.jpg",
-      desc: "مامۆستای کیمیا واڵتەر وایت بۆ پاراستنی خێزانەکەی دەکەوێتە بازرگانی ماددە هۆشبەرەکان. یەکێک لە باشترین زنجیرە مێژووییەکانی مێژوو.",
-      tmdbId: "1396",
-      seasonsData: [{ season: 1, episodes: 7 }, { season: 2, episodes: 13 }, { season: 3, episodes: 13 }, { season: 4, episodes: 13 }, { season: 5, episodes: 16 }]
-    },
-    {
-      title: "Vikings",
-      type: "series",
-      img: "https://image.tmdb.org/t/p/w500/bQLH879T9HsSStIAlEkp987mYgn.jpg",
-      desc: "چیرۆکی ڕاگنار لۆدبرۆک و گەشتی وایکینگەکان بۆ دۆزینەوەی خاک و شکۆ. ئەفسانەیی و پڕ لە شەڕ و سەرکێشی.",
-      tmdbId: "44217",
-      seasonsData: [{ season: 1, episodes: 9 }, { season: 2, episodes: 10 }, { season: 3, episodes: 10 }, { season: 4, episodes: 20 }, { season: 5, episodes: 20 }, { season: 6, episodes: 20 }]
     }
   ];
 
@@ -598,22 +581,20 @@
   let contentViews = {};
   let notifications = [];
 
+  // تێبینی: کۆدەکانی Firebase لێرە جێگیر دەکرێن لە داهاتوودا. 
+  // بۆ ئێستا بە localStorage دەیهێڵینەوە تا کێشەت بۆ دروست نەبێت.
   function saveData() {
-    localStorage.setItem("cine_users_final", JSON.stringify(users));
-    localStorage.setItem("cine_content_final", JSON.stringify(globalContent));
-    localStorage.setItem("cine_views_final", JSON.stringify(contentViews));
-    localStorage.setItem("cine_notif_final", JSON.stringify(notifications));
+    localStorage.setItem("cine_users_v2", JSON.stringify(users));
+    localStorage.setItem("cine_content_v2", JSON.stringify(globalContent));
+    localStorage.setItem("cine_views_v2", JSON.stringify(contentViews));
+    localStorage.setItem("cine_notif_v2", JSON.stringify(notifications));
   }
   function loadData() {
     try {
-      let su = localStorage.getItem("cine_users_final");
-      if(su) users = JSON.parse(su);
-      let sc = localStorage.getItem("cine_content_final");
-      if(sc) globalContent = JSON.parse(sc);
-      let sv = localStorage.getItem("cine_views_final");
-      if(sv) contentViews = JSON.parse(sv);
-      let sn = localStorage.getItem("cine_notif_final");
-      if(sn) notifications = JSON.parse(sn);
+      let su = localStorage.getItem("cine_users_v2"); if(su) users = JSON.parse(su);
+      let sc = localStorage.getItem("cine_content_v2"); if(sc) globalContent = JSON.parse(sc);
+      let sv = localStorage.getItem("cine_views_v2"); if(sv) contentViews = JSON.parse(sv);
+      let sn = localStorage.getItem("cine_notif_v2"); if(sn) notifications = JSON.parse(sn);
     } catch(e) { console.warn(e); }
     if(!users["admin"]) users["admin"] = { password: "admin123", email: "admin@cinema.com", favorites: [], watchlist: [], history: [], ratings: {}, comments: {} };
     saveData();
@@ -622,28 +603,29 @@
   function addNotification(msg) {
     notifications.unshift({ text: msg, date: new Date().toISOString() });
     if(notifications.length > 20) notifications.pop();
-    saveData();
-    updateNotifyUI();
+    saveData(); updateNotifyUI();
   }
 
   function updateNotifyUI() {
     let cont = document.getElementById("notifyContent");
     if(notifications.length === 0) cont.innerHTML = "هیچ ئاگانامەیەک نییە";
-    else {
-      cont.innerHTML = notifications.slice(0,5).map(n => `<div style="margin-bottom:8px;">🔔 ${n.text}<br><small>${new Date(n.date).toLocaleString()}</small></div>`).join('');
-    }
+    else cont.innerHTML = notifications.slice(0,5).map(n => `<div style="margin-bottom:8px;">🔔 ${n.text}<br><small>${new Date(n.date).toLocaleString()}</small></div>`).join('');
   }
 
   function setCurrentUser(username) {
     currentUser = username;
-    localStorage.setItem("cine_currentUser_final", username);
+    localStorage.setItem("cine_currentUser_v2", username);
     updateUserUI();
+    const adminIcon = document.getElementById("adminToggle");
+    if(adminIcon) adminIcon.style.display = (currentUser === "admin") ? "block" : "none";
     renderGrid();
   }
   function logout() {
     currentUser = null;
-    localStorage.removeItem("cine_currentUser_final");
+    localStorage.removeItem("cine_currentUser_v2");
     updateUserUI();
+    const adminIcon = document.getElementById("adminToggle");
+    if(adminIcon) adminIcon.style.display = "none";
     renderGrid();
   }
   function updateUserUI() {
@@ -665,38 +647,24 @@
 
   function getAvgRating(title) {
     let total = 0, count = 0;
-    for(let u in users) {
-      let r = users[u].ratings[title];
-      if(r) { total += r; count++; }
-    }
+    for(let u in users) { let r = users[u].ratings[title]; if(r) { total += r; count++; } }
     return count === 0 ? 0 : total / count;
   }
-  function getUserRating(title) {
-    return currentUser ? (users[currentUser]?.ratings[title] || 0) : 0;
-  }
+  function getUserRating(title) { return currentUser ? (users[currentUser]?.ratings[title] || 0) : 0; }
   function setUserRating(title, stars) {
     if(!currentUser) { addNotification("تکایە بچۆ ژوورەوە بۆ هەڵسەنگاندن"); return false; }
-    users[currentUser].ratings[title] = stars;
-    saveData();
-    addNotification(`تۆ ${stars} ئەستێرەت بە "${title}" دا`);
-    return true;
+    users[currentUser].ratings[title] = stars; saveData(); addNotification(`تۆ ${stars} ئەستێرەت بە "${title}" دا`); return true;
   }
   function getComments(title) {
     let all = [];
-    for(let u in users) {
-      let cs = users[u].comments[title];
-      if(cs) cs.forEach(c => all.push({ user: u, text: c.text, date: c.date }));
-    }
-    all.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    return all;
+    for(let u in users) { let cs = users[u].comments[title]; if(cs) cs.forEach(c => all.push({ user: u, text: c.text, date: c.date })); }
+    all.sort((a,b)=>new Date(b.date)-new Date(a.date)); return all;
   }
   function addComment(title, text) {
     if(!currentUser) { addNotification("تکایە بچۆ ژوورەوە بۆ کۆمێنت"); return false; }
     if(!users[currentUser].comments[title]) users[currentUser].comments[title] = [];
     users[currentUser].comments[title].push({ text, date: new Date().toISOString() });
-    saveData();
-    addNotification(`کۆمێنتێکی نوێ لە "${title}"`);
-    return true;
+    saveData(); addNotification(`کۆمێنتێکی نوێ لە "${title}"`); return true;
   }
   function toggleFav(title) {
     if(!currentUser) { addNotification("تکایە بچۆ ژوورەوە"); return false; }
@@ -770,9 +738,7 @@
     if(item.type === 'movie') {
       html += `<div class="parts-grid">`;
       item.parts.forEach((part, idx) => {
-        let servers = `<div class="servers-group"><button class="server-btn" onclick="playMovie('${part.link}', '${escapeHtml(item.title)}', '${escapeHtml(part.name)}')">🎬 سێرڤەر 1</button>`;
-        if(part.server2) servers += `<button class="server-btn" onclick="playMovie('${part.server2}', '${escapeHtml(item.title)}', '${escapeHtml(part.name)}')">⚡ سێرڤەر 2</button>`;
-        servers += `</div>`;
+        let servers = `<div class="servers-group"><button class="server-btn" onclick="playMovie('${part.link}', '${escapeHtml(item.title)}', '${escapeHtml(part.name)}')">🎬 سەیرکردن</button></div>`;
         html += `<div class="part-card">
           <img src="${part.img}" onerror="this.src='https://placehold.co/200x300?text=No+Poster'">
           <div class="part-name"><strong>${part.name}</strong></div>
@@ -781,52 +747,44 @@
         </div>`;
       });
       html += `</div>`;
-    } else {
-      html += `<div id="seriesPanel"><h4>📺 وەرزەکان:</h4><div id="seasonsList"></div><div id="episodesList" style="margin-top:16px;"></div></div>`;
-      html += `<script>
-        setTimeout(() => {
-          let seasons = ${JSON.stringify(item.seasonsData)};
-          let tmdb = "${item.tmdbId}";
-          let title = "${escapeHtml(item.title)}";
-          let container = document.getElementById('seasonsList');
-          if(container) {
-            container.innerHTML = seasons.map(s => '<button class="server-btn" data-season="'+s.season+'" onclick="loadEpisodesSeries('+s.season+', \\''+tmdb+'\\', \\''+title+'\\')">وەرزی '+s.season+'</button>').join('');
-          }
-        }, 100);
-      <\/script>`;
-    }
+    } else { html += `<p>هیچ زنجیرەیەک نییە لەم کۆمەڵەدا</p>`; }
 
     let commentList = getComments(item.title);
     html += `<div style="margin-top:32px;"><h4><i class="fa-regular fa-comment"></i> کۆمێنتەکان (${commentList.length})</h4>`;
-    commentList.forEach(c => {
-      html += `<div class="comment-item"><strong>${escapeHtml(c.user)}</strong> <span style="font-size:0.7rem;">${new Date(c.date).toLocaleString()}</span><br>${escapeHtml(c.text)}</div>`;
-    });
+    commentList.forEach(c => { html += `<div class="comment-item"><strong>${escapeHtml(c.user)}</strong> <span style="font-size:0.7rem;">${new Date(c.date).toLocaleString()}</span><br>${escapeHtml(c.text)}</div>`; });
     html += `<textarea id="newComment" rows="2" style="width:100%; background:#1e1e2e; border-radius:24px; padding:12px; margin-top:12px;" placeholder="ڕای خۆت بنووسە..."></textarea>
     <button class="server-btn" style="margin-top:8px;" onclick="addComment('${escapeHtml(item.title)}')">ناردن</button></div>`;
     return html;
   }
 
-  window.playMovie = (link, title, part) => { addToHistory(title, part); document.getElementById("modalContent").innerHTML = `<button class="close-modal" onclick="openDetail('${escapeHtml(title)}')" style="background:#333;">← گەڕانەوە</button><iframe src="${link}" frameborder="0" allowfullscreen></iframe>`; };
-  window.loadEpisodesSeries = (season, tmdbId, title) => {
-    let item = globalContent.find(i => i.tmdbId === tmdbId);
-    if(!item) return;
-    let seasonObj = item.seasonsData.find(s => s.season === season);
-    let epCount = seasonObj ? seasonObj.episodes : 10;
-    let epHtml = `<div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px;">`;
-    for(let i=1;i<=epCount;i++) epHtml += `<button class="server-btn" onclick="playSeries('${tmdbId}', ${season}, ${i}, '${escapeHtml(title)}', 'وەرزی ${season} ئەڵقەی ${i}')">ئەڵقەی ${i}</button>`;
-    epHtml += `</div>`;
-    document.getElementById("episodesList").innerHTML = epHtml;
+  // لێرەدا کۆدی ژێرنووس و ڤیدیۆکەمان گۆڕیوە
+  window.playMovie = (link, title, part) => { 
+    addToHistory(title, part); 
+    
+    let playerHtml = '';
+    // ئەگەر ڤیدیۆکە فایلی ڕاستەقینە بێت (.mp4)، Plyr کار دەکات بە ژێرنووسەوە
+    if(link.includes('.mp4') || link.includes('.m3u8')) {
+      playerHtml = `
+        <video id="kurdPlayer" playsinline controls data-poster="https://i.ibb.co/0ym8PgzQ/78536ff0f8111a296f97fcfd3b179884.jpg">
+          <source src="${link}" type="video/mp4" />
+          <track kind="captions" label="Kوردیش" srclang="ku" src="kurdish-sub.vtt" default />
+        </video>
+      `;
+    } else {
+      // ئەگەر لینکی وەک vidsrc بێت، بە ئاسایی دەکرێتەوە
+      playerHtml = `<iframe src="${link}" frameborder="0" allowfullscreen></iframe>`;
+    }
+
+    document.getElementById("modalContent").innerHTML = `<button class="close-modal" onclick="openDetail('${escapeHtml(title)}')">← گەڕانەوە</button>${playerHtml}`; 
+    
+    // چالاککردنی Plyr ئەگەر ڤیدیۆی mp4 بێت
+    if(link.includes('.mp4') || link.includes('.m3u8')) {
+      const player = new Plyr('#kurdPlayer');
+    }
   };
-  window.playSeries = (tmdbId, season, ep, title, part) => {
-    addToHistory(title, part);
-    let link = `https://vidsrc.cc/v2/embed/tv/${tmdbId}/${season}/${ep}`;
-    document.getElementById("modalContent").innerHTML = `<button class="close-modal" onclick="openDetail('${escapeHtml(title)}')" style="background:#333;">← گەڕانەوە</button><iframe src="${link}" frameborder="0" allowfullscreen></iframe>`;
-  };
+
   window.rateItem = (title, stars) => { if(setUserRating(title, stars)) openDetail(title); };
-  window.addComment = (title) => {
-    let txt = document.getElementById("newComment").value.trim();
-    if(txt && addComment(title, txt)) openDetail(title);
-  };
+  window.addComment = (title) => { let txt = document.getElementById("newComment").value.trim(); if(txt && addComment(title, txt)) openDetail(title); };
   window.toggleFav = toggleFav;
   window.toggleWatchlist = toggleWatchlist;
 
@@ -834,10 +792,11 @@
   function updateAdminFields() {
     let type = document.getElementById("adminType").value;
     let container = document.getElementById("dynamicAdminFields");
-    if(type === "movie") container.innerHTML = `<textarea id="partsJson" rows="6" placeholder='[{"name":"ناوی بەش","img":"پۆستەر","link":"https://vidsrc.cc/v2/embed/movie/ID","desc":"باسکردنی بەش"}]'></textarea>`;
+    if(type === "movie") container.innerHTML = `<textarea id="partsJson" rows="6" placeholder='[{"name":"ناوی بەش","img":"پۆستەر","link":"لینکی ڤیدیۆ یان .mp4","desc":"باسکردنی بەش"}]'></textarea>`;
     else container.innerHTML = `<textarea id="seasonsJson" rows="3" placeholder='[{"season":1,"episodes":10}]'></textarea><input id="tmdbId" placeholder="TMDB ID *">`;
   }
   window.addCustomContent = () => {
+    if(currentUser !== "admin") { alert("تەنها بەڕێوەبەر دەتوانێت زیاد بکات"); return; }
     let title = document.getElementById("adminTitle").value.trim();
     let img = document.getElementById("adminImage").value.trim();
     let desc = document.getElementById("adminDesc").value.trim();
@@ -864,6 +823,7 @@
     let e = document.getElementById("regEmail").value.trim();
     let p = document.getElementById("regPassword").value;
     if(!u || !e || !p) { document.getElementById("regError").innerText = "پڕکردنەوەی هەموو خانەکان پێویستە"; return; }
+    if(u === "admin") { document.getElementById("regError").innerText = "ناوی بەڕێوەبەر بۆ تۆمارکردن نییە"; return; }
     if(users[u]) { document.getElementById("regError").innerText = "ناو هەیە"; return; }
     users[u] = { password: p, email: e, favorites: [], watchlist: [], history: [], ratings: {}, comments: {} };
     saveData(); setCurrentUser(u); document.getElementById("authModal").style.display = "none";
@@ -891,21 +851,15 @@
     if(!currentUser) showAuthModal();
     else { document.getElementById("userDropdown").classList.toggle("show"); e.stopPropagation(); }
   };
-  document.getElementById("bellIcon").onclick = (e) => {
-    document.getElementById("notifyDropdown").classList.toggle("show");
-    e.stopPropagation();
-  };
+  document.getElementById("bellIcon").onclick = (e) => { document.getElementById("notifyDropdown").classList.toggle("show"); e.stopPropagation(); };
   document.addEventListener("click", (e) => {
-    if(!document.getElementById("avatarBtn").contains(e.target) && !document.getElementById("userDropdown").contains(e.target))
-      document.getElementById("userDropdown").classList.remove("show");
-    if(!document.getElementById("bellIcon").contains(e.target) && !document.getElementById("notifyDropdown").contains(e.target))
-      document.getElementById("notifyDropdown").classList.remove("show");
+    if(!document.getElementById("avatarBtn").contains(e.target) && !document.getElementById("userDropdown").contains(e.target)) document.getElementById("userDropdown").classList.remove("show");
+    if(!document.getElementById("bellIcon").contains(e.target) && !document.getElementById("notifyDropdown").contains(e.target)) document.getElementById("notifyDropdown").classList.remove("show");
   });
   document.querySelectorAll(".chip").forEach(chip => chip.addEventListener("click", function() {
     currentFilter = this.dataset.type; onlyFav = false; onlyWatch = false; onlyHistory = false;
     document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
-    this.classList.add("active");
-    renderGrid(); updateMenuStyle();
+    this.classList.add("active"); renderGrid(); updateMenuStyle();
   }));
   function updateMenuStyle() {
     document.getElementById("favMenuBtn").style.background = onlyFav ? "#f8d64e" : "";
@@ -917,15 +871,12 @@
   document.getElementById("historyMenuBtn").onclick = () => { if(!currentUser) showAuthModal(); else { onlyHistory = !onlyHistory; onlyFav = false; onlyWatch = false; if(onlyHistory) { currentFilter = "all"; document.querySelectorAll(".chip")[0].classList.add("active"); document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active")); document.querySelectorAll(".chip")[0].classList.add("active"); } renderGrid(); updateMenuStyle(); } };
   document.querySelectorAll(".menu-item[data-menu]").forEach(btn => btn.addEventListener("click", function() {
     currentFilter = this.dataset.menu; onlyFav = false; onlyWatch = false; onlyHistory = false;
-    document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
-    document.querySelectorAll(".chip")[0].classList.add("active");
+    document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active")); document.querySelectorAll(".chip")[0].classList.add("active");
     renderGrid(); updateMenuStyle();
   }));
   document.getElementById("adminToggle").onclick = () => {
     if(currentUser !== "admin") { alert("تەنها بەڕێوەبەر (admin/admin123)"); return; }
-    let p = document.getElementById("adminPanel");
-    p.style.display = p.style.display === "none" ? "block" : "none";
-    updateAdminFields();
+    let p = document.getElementById("adminPanel"); p.style.display = p.style.display === "none" ? "block" : "none"; updateAdminFields();
   };
   document.getElementById("adminType").addEventListener("change", updateAdminFields);
   document.getElementById("saveAdminBtn").onclick = addCustomContent;
@@ -936,26 +887,20 @@
   function createParticles() {
     let container = document.getElementById("particles");
     for(let i=0;i<80;i++) {
-      let p = document.createElement("div");
-      p.classList.add("particle");
-      let s = Math.random()*8+2;
-      p.style.width = s+"px"; p.style.height = s+"px";
-      p.style.left = Math.random()*100+"%";
-      p.style.animationDuration = Math.random()*15+8+"s";
-      p.style.animationDelay = Math.random()*10+"s";
+      let p = document.createElement("div"); p.classList.add("particle");
+      let s = Math.random()*8+2; p.style.width = s+"px"; p.style.height = s+"px"; p.style.left = Math.random()*100+"%";
+      p.style.animationDuration = Math.random()*15+8+"s"; p.style.animationDelay = Math.random()*10+"s";
       container.appendChild(p);
     }
   }
   createParticles();
 
   loadData();
-  let saved = localStorage.getItem("cine_currentUser_final");
-  if(saved && users[saved]) setCurrentUser(saved);
-  else currentUser = null;
-  updateUserUI();
-  renderGrid();
-  updateMenuStyle();
-  updateNotifyUI();
+  let saved = localStorage.getItem("cine_currentUser_v2");
+  if(saved && users[saved]) setCurrentUser(saved); else currentUser = null;
+  updateUserUI(); renderGrid(); updateMenuStyle(); updateNotifyUI();
+  const adminIcon = document.getElementById("adminToggle");
+  if(adminIcon) adminIcon.style.display = (currentUser === "admin") ? "block" : "none";
 </script>
 </body>
 </html>
